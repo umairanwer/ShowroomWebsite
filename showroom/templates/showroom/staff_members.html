@@ -1,0 +1,22 @@
+{% extends 'showroom/base.html' %}
+
+{% block title %}Our Staff{% endblock title %}
+
+{% block content %}
+    {% if staff_members %}
+    <div class="row m-5">
+    {% for person in staff_members %}
+    <div class="col-lg-2 col-sm-4 mb-3 mb-sm-0">
+        <div class="card p-1" >
+            <img src="{{person.staff_pic.url|default_if_none:'#'}}" class="card-img-top" alt="Member Pic">
+            <div class="card-body">
+                <h5 class="card-title">{{person.name}}</h5>
+                <p class="card-title">Role: {{person.role}}</p>
+            </div>
+        </div>
+        </div> 
+    {% endfor %}
+    </div>   
+
+    {% endif %}
+{% endblock content %}

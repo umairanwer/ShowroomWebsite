@@ -1,0 +1,27 @@
+{% extends 'showroom/base.html' %}
+
+{% block title %}Models Available{% endblock title %}
+
+{% block content %}
+    {% if carmodels %}
+    <div class="row m-5">
+    {% for carmodel in carmodels %}
+    <div class="col-lg-3 col-sm-6 mb-3 mb-sm-0">
+        <div class="card" >
+            <img src="{{carmodel.get_pic_url|default_if_none:'#'}}" class="card-img-top" alt="Model Pic">
+            <div class="card-body">
+                <h5 class="card-title">{{carmodel.name}}</h5>
+
+                {% with num_cars=carmodel.carmodels.all|length %}
+                <p class="card-text">{{num_cars}} cars available for sale.</p>
+                {% endwith %}
+                <a href="{% url 'showroom:cars_list' carmodel.carBrand.id carmodel.id %}" class="btn btn-primary">
+                    See Available Cars</a>
+            </div>
+        </div>
+        </div> 
+    {% endfor %}
+    </div>   
+
+    {% endif %}
+{% endblock content %}

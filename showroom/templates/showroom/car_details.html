@@ -1,0 +1,31 @@
+{% extends 'showroom/base.html' %}
+
+{% block title %}{{car_details.name}}{% endblock title %}
+
+
+{% block content %}
+{% if car_details %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 mb-4 order-1 order-md-2">
+            <img src="{{ car_details.get_pic_url|default_if_none:'#' }}" class="card-img-top border rounded" alt="Car Pic">
+        </div>
+        <div class="col-md-6 mb-4 order-2 order-md-1">
+            <h1 class="text-center">{{ car_details.name }}</h1>
+            <p><strong>Make:</strong> {{ car_details.carModel.carBrand }}</p>
+            <p><strong>Model:</strong> {{ car_details.carModel }}</p>
+            <p><strong>Year:</strong> {{ car_details.year }}</p>
+            <p><strong>Mileage:</strong> {{ car_details.mileage }} km</p>
+            <p><strong>Price:</strong> Rs. {{ car_details.price }}</p>
+            <h3>Features</h3>
+            <ul>
+                {% for feature in car_details.features.all %}
+                <li>{{ feature }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endblock content %}

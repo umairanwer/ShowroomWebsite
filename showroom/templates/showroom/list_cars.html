@@ -1,0 +1,27 @@
+{% extends 'showroom/base.html' %}
+
+{% block title %}List of ____{% endblock title %}
+
+{% block content %}
+    {% if cars_list %}
+        <div class="row m-5">
+        {% for car in cars_list %}
+                
+        <div class="col-lg-3 col-sm-6 mb-3 mb-sm-0">
+        <div class="card" >
+            <img src="{{car.get_pic_url|default_if_none:'#'}}" class="card-img-top" alt="Car Pic">
+            <div class="card-body">
+                <h5 class="card-title">{{car.carModel}} ({{car.year}})</h5>
+                <p class="card-text">Mileage: {{car.mileage}} km</p>
+                <p class="card-text">Price: Rs. {{car.get_price}}</p>
+                <p class="card-text">Engine Capacity: {{car.engine.engCapacity}} cc</p>
+                  <a href="{% url 'showroom:car_details' car.carModel.carBrand.id car.carModel.id car.chassis_num %}" class="btn btn-primary">
+                    See Details</a> 
+            </div>
+        </div>
+        </div> 
+        {% endfor %}
+        </div>
+        
+    {% endif %}
+{% endblock content%}

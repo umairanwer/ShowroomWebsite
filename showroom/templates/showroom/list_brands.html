@@ -1,0 +1,24 @@
+{% extends 'showroom/base.html' %}
+
+{% block title %}Brands Available{% endblock title %}
+
+{% block content %}
+    {% if brands %}
+    <div class="row m-5">
+    {% for brand in brands %} 
+    <div class="col-lg-3 col-sm-6 mb-3 mb-sm-0">
+        <div class="card" >
+            <img src="{{brand.pic.url}}" class="card-img-top" 
+                style="max-height: 200px; width: auto; height: auto;" alt="Brand Logo">
+            <div class="card-body">
+                <h5 class="card-title">{{brand.name}}</h5>
+                <p class="card-text">{{brand.carbrand.all|length}} models available.</p>
+                <a href="{% url 'showroom:car_models_detail' brand.id %}" class="btn btn-primary">See Available Models</a>
+            </div>
+        </div>
+        </div> 
+    {% endfor %}
+    </div>   
+    {% endif %}
+   
+{% endblock content %}
